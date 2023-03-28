@@ -738,7 +738,7 @@ def gen_hardware_graph(library_dir, prefix = "") :
 def gen_task_to_hw_mapping(library_dir, prefix = "") :
     # get files
     file_list = [f for f in os.listdir(library_dir) if os.path.isfile(os.path.join(library_dir, f))]
-    task_to_hardware_mapping_file_name = get_full_file_name(prefix + "Task To Hardware Mapping.csv", file_list)
+    task_to_hardware_mapping_file_name = get_full_file_name(prefix + "Task to Hardware Mapping.csv", file_list)
     task_to_hardware_mapping_file_addr =  os.path.join(library_dir, task_to_hardware_mapping_file_name)
     task_to_hardware_mapping = parse_task_to_hw_mapping(task_to_hardware_mapping_file_addr)
 

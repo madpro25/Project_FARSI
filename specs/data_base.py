@@ -405,7 +405,7 @@ class DataBase:
         suffix = blk_name.split("_")[-1]
         # This is becuase BlockL do not have an instance name
         # generate the block
-        blockL = [el for el in self.blocksL if el.block_instance_name_without_type == blk_name_refined][0]
+        blockL = [el for el in self.blocksL if blk_name_refined in el.block_instance_name_without_type ][0]
         block = self.cast(blockL)
         block_name = block.instance_name + "_" + suffix
         block.set_instance_name(block_name)

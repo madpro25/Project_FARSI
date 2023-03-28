@@ -7,7 +7,8 @@ import os
 import shutil
 import multiprocessing
 import psutil
-sys.path.append(os.path.abspath('./../'))
+# sys.path.append(os.path.abspath("/data_collection/"))
+sys.path.append(os.path.abspath('data_collection/collection_utils/'))
 import home_settings
 from top.main_FARSI import run_FARSI
 from top.main_FARSI import run_FARSI
@@ -336,7 +337,7 @@ def get_all_final_folders(check_points_start):
 
 if __name__ == "__main__":
     batch_count = 1
-    check_points_top_folders = ["/home/reddi-rtx/FARSI_related_stuff/Project_FARSI_TECS/Project_FARSI_6/data_collection/data/simple_run/03-03_13-47_59"]
+    check_points_top_folders = ["/home/aaditya/Project_FARSI/data_collection/data/simple_run/03-03_13-47_59"]
     check_points_start = False
     check_points_top_folders = get_all_final_folders(check_points_start)
 

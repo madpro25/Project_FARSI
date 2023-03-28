@@ -2407,7 +2407,7 @@ class DesignHandler:
         ex_dp, sim_dp = des_tup
         if mode == "hot_kernel":
             hot_block = self.sim_dp.get_dp_stats().get_hot_block_system_complex(des_tup, hot_kernel_pos)
-            hot_blck_synced = self.find_cores_hot_kernel_blck_bottlneck(ex_dp, hot_blck)
+            hot_blck_synced = self.find_cores_hot_kernel_blck_bottlneck(ex_dp, hot_block)
             if hot_block.type == "ic":
                 self.fork_bus(ex_dp, hot_blck_synced)
             else:

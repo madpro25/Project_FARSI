@@ -4,7 +4,8 @@
 
 import sys
 import os
-sys.path.append(os.path.abspath('./../'))
+# sys.path.append(os.path.abspath('./../'))
+sys.path.append(os.path.abspath('data_collection/collection_utils/'))
 import home_settings
 from top.main_FARSI import run_FARSI_only_simulation
 from settings import config
@@ -58,12 +59,12 @@ if __name__ == "__main__":
     # -------------------------------------------
     experiment_repetition_cnt = 1
     reduction = "most_likely"
-    #workloads = {"audio_decoder", "edge_detection"}
-    #workloads = {"audio_decoder"}
-    #workloads = {"edge_detection"}
-    #workloads = {"hpvm_cava"}
-    workloads = {"partial_SOC_example_hard"}
-    workloads = {"SOC_example_1p_2r"}
+    #workloads = {"audio_decoder", "edge_detection"}          # Files not found as listed below 
+    #workloads = {"audio_decoder"}                            # Task to Hardware Mapping not found
+    #workloads = {"edge_detection"}                           # Hardware Graph.csv not found
+    workloads = {"hpvm_cava"}                                # working
+    #workloads = {"partial_SOC_example_hard"}                 # files not available
+    #workloads = {"SOC_example_1p_2r"}                        # working, Sanity checks still failing TODO
     tech_node_SF = {"perf":1, "energy":{"non_gpp":.064, "gpp":1}, "area":{"non_mem":.0374 , "mem":.079, "gpp":1}}   # technology node scaling factor
     db_population_misc_knobs = {"ip_freq_correction_ratio": 1, "gpp_freq_correction_ratio": 1,
                                 "tech_node_SF":tech_node_SF,

@@ -4,5 +4,7 @@
 
 import os
 import sys
-sys.path.append(os.path.abspath('../../../'))
-home_dir = os.getcwd() +"/../../../"
+sys.path.append("/home/aaditya/Project_FARSI/")
+# home_dir = os.getcwd() +"/../../../"
+home_dir = "/home/aaditya/Project_FARSI/"
+# print(type(home_dir))
