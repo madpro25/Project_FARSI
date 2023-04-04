@@ -1,0 +1,5 @@
+[03-04-2023 9:00 PM] Started a run with the same config file
+Changing the ranking modes throws an error so could no try that. Need to look into it.
+
+
+
