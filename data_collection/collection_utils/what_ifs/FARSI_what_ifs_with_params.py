@@ -264,7 +264,7 @@ def aggregate_results(run_folder):
     first = True
     for dir in sorted_based_on_depth:
         if "result_summary" in dir:
-            file_to_copy = os.path.join(dir, "FARSI_simple_run_0_1_all_reults.csv")
+            file_to_copy = os.path.join(dir, "FARSI_simple_run_0_1_all_results.csv")
             file = open(file_to_copy, "r")
             data2 = file.read().splitlines(True)
             file.close()

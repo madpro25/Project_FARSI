@@ -62,9 +62,9 @@ if __name__ == "__main__":
     #workloads = {"audio_decoder", "edge_detection"}          # Files not found as listed below 
     #workloads = {"audio_decoder"}                            # Task to Hardware Mapping not found
     #workloads = {"edge_detection"}                           # Hardware Graph.csv not found
-    workloads = {"hpvm_cava"}                                # working
+    #workloads = {"hpvm_cava"}                                # working
     #workloads = {"partial_SOC_example_hard"}                 # files not available
-    #workloads = {"SOC_example_1p_2r"}                        # working, Sanity checks still failing TODO
+    workloads = {"SOC_example_1p_2r"}                        # working, TODO: Sanity checks still failing 
     tech_node_SF = {"perf":1, "energy":{"non_gpp":.064, "gpp":1}, "area":{"non_mem":.0374 , "mem":.079, "gpp":1}}   # technology node scaling factor
     db_population_misc_knobs = {"ip_freq_correction_ratio": 1, "gpp_freq_correction_ratio": 1,
                                 "tech_node_SF":tech_node_SF,
