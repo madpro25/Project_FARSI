@@ -1,5 +1,12 @@
 [03-04-2023 9:00 PM] Started a run with the same config file
-Changing the ranking modes throws an error so could no try that. Need to look into it.
+Changing the ranking modes throws an error so could not try that. Need to look into it.
 
+[04-04-2023 6:49 PM] Changed dse collection mode to parallel and heuristic to exhaustive
+Hope this runs faster or better in some regard.
 
+[UPDATE] Turns out there is no way to run the dse in any mode except hill climbing. And Hill climbing
+does not need the collection mode parameter.
 
+[04-04-2023 8:58 PM] Attempt at parallelizing the workloads
+Successfully have all the 4 workloads running in parallel. Now need to figure out the implications of what I
+just did.

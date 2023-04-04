@@ -21,8 +21,8 @@ simulation_method = "performance"   # whether to performance simulator or power 
 # DSE params
 # --------------------
 # algorithm
-dse_type = "hill_climbing"   # [exhaustive, hill_climbing]  # type of the design space exploration
-dse_collection_mode = "serial"  # [serial, parallel] # only relevant for exhaustive for now
+dse_type = "exhaustive"   # [exhaustive, hill_climbing]  # type of the design space exploration
+dse_collection_mode = "python parallel"  # [serial, parallel] # only relevant for exhaustive for now
                                          # python parallel: python spawns processes  (used when running within a server)
                                          # bash_parallel: you need to manually run the processes (used when you want to
                                          #                                                    run across multiple servers)

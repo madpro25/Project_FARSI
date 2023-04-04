@@ -219,26 +219,40 @@ def run(check_points_start, check_points_top_folder, previous_results):
     for check_point_el in check_points_values:
         check_point = {"start":check_point_el[0], "folder":check_point_el[1], "prev_itr": previous_results}
         for trans_sel_mode in transformation_selection_mode_list:
+            p=[]
             for w in workloads:
                 workloads_first_letter = '_'.join(sorted([el[0] for el in w])) +"__"+trans_sel_mode[0]
                 workload_folder = os.path.join(run_folder, workloads_first_letter)
                 if not os.path.exists(workload_folder):
                     os.mkdir(workload_folder)
+
+
                 for d in SA_depth:
                     for latency_scaling,power_scaling, area_scaling in itertools.product(latency_scaling_range, power_scaling_range, area_scaling_range):
                         base_budget_scaling = {"latency": latency_scaling, "power": power_scaling, "area": area_scaling}
                         if config.memory_conscious:
                             # use subprocess  to free memory
                             ret_value = multiprocessing.Value("d", 0.0, lock=False)
-                            p = multiprocessing.Process(target=run_with_params, args=[w, d, freq_range, base_budget_scaling, trans_sel_mode, study_type, workload_folder, date_time, check_point, ret_value])
-                            p.start()
-                            p.join()
+                            p.append(multiprocessing.Process(target=run_with_params, args=[w, d, freq_range, base_budget_scaling, trans_sel_mode, study_type, workload_folder, date_time, check_point, ret_value]))
+                            #p.start()
+                            #print("\n\n\n Hello \n\n\n")
+
 
                             # checking for memory issues
-                            if ret_value.value == 1:
-                                return "out_of_memory", run_folder
+                            #if ret_value.value == 1:
+                                #return "out_of_memory", run_folder
                         else:
                             dse_hndler = run_with_params(w, d, freq_range, base_budget_scaling, trans_sel_mode, study_type, workload_folder, date_time, check_point)
+            print(len(p))
+            if config.memory_conscious:
+                for i in p:
+                    i.start()
+                    print("\n\n\n Hello \n\n\n")
+                for i in p:
+                    i.join()
+                if ret_value.value == 1:
+                    return "out of memory", run_folder
+
     return "others", run_folder
 
 def create_final_folder(run_folder):
