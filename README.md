@@ -24,37 +24,45 @@ To further clarify this, the figure below puts FARSI on the map compared to the 
 
 ## Building/Installing FARSI
 FARSI is a python based source code. Hence, relevant python libraries need to be installed.
+```bash
 conda env create -f environment.yml;
 conda activate farsi;
 conda env list;
+```
 
 Download cacti modified for FARSI from https://github.com/zaddan/cacti_for_FARSI and put it in ${CACTI_FOLDER}.
 
 Change paths in Project_FARSI/settings/config_cacti.py
 
+```python
 cact_bin_addr = "${CACTI_FOLDER}/cacti"
 
 cacti_param_addr = "${CACTI_FOLDER}/farsi_gen.cfg"
 
 cacti_data_log_file = "${CACTI_FOLDER}/data_log.csv"
-
+```
+Add sys.path variable in various scripts according to your local directory structure. The specific scirpts are:
+* data_collection/collection_utils/home_settings.py
+* data_collection/collection_utils/sim_run/simple_sim_run.py
+* data_collection/collection_utils/what_ifs/FARSI_what_ifs_with_params.py
+    * In addition to the sys.path variable, also change the check_points_top_folders in the main function of the script.
 
 
 ## FARSI Input
-Software/hardware database shown above is used as an input to FARSI's framework. Here we briefly explain their functionality and encoding. 
+Software/hardware database shown above is used as an input to FARSI's framework. Here we briefly explain their functionality and encoding.
 
 **Software Database:** This includes labeled task dependency graphs (TDG). A task is the smallest optimization unit and is typically selected from the computationally intensive functions since they significantly impact the system behavior. TDG contains the dependency information between tasks, the number of instructions processed within a task, and the data movement between them.
- 
+
 **Hardware Database**: This involves power, performance, and area estimation of each task for different hardware mappings (e.g., to general-purpose processors or specialized accelerators).
 
 ### FARSI Input Encoding:
-Although the semantics discussed above can be encoded and inputted in various formats, currently, our front-end parsers take them in the form of spreadsheets. Here we detail these sheets. Please note that examples of these sheets are provided in the specs/database_data/parsing folder. 
+Although the semantics discussed above can be encoded and inputted in various formats, currently, our front-end parsers take them in the form of spreadsheets. Here we detail these sheets. Please note that examples of these sheets are provided in the specs/database_data/parsing folder.
 
 Each workload has its set of spreadsheet whose name starts with the $workload name$_database, e.g., audio_decoder_database.
 
 **Software Database Spreadsheets**
 
-*Task Data Movement:* contains information about the data movement between tasks and their execution dependency. This sheet is an adjacency matrix format, where the first row and the first column list the workload's tasks. The cell at the coordinate between two tasks shows the data movement among them. Note that data flows from the task shown in the row to the task shown in the column. Also, note that this format implies the execution dependency between tasks if said cells are non-empty. 
+*Task Data Movement:* contains information about the data movement between tasks and their execution dependency. This sheet is an adjacency matrix format, where the first row and the first column list the workload's tasks. The cell at the coordinate between two tasks shows the data movement among them. Note that data flows from the task shown in the row to the task shown in the column. Also, note that this format implies the execution dependency between tasks if said cells are non-empty.
 
 *Task instruction count:* contains information about each task's computation, specifically quantifying its non-memory instruction count.
 
@@ -78,10 +86,10 @@ Each workload has its set of spreadsheet whose name starts with the $workload na
 
 *Hardware Graph:* contains information about how hardware components are connected. It's an adjacency matrix with the first row and the first column specifying the hardware block names. a **1** in the cell at the coordinate between two blocks indicates a connection between said blocks.
 
-*Task To Hardware Mapping:* contains information about which hardware blocks various tasks are mapped to. The first row specifies the hardware block names, and the first column specifies the software task names. If a task is mapped onto a hardware block, it is listed under that block. We follow two conventions within this spread sheet. 
+*Task To Hardware Mapping:* contains information about which hardware blocks various tasks are mapped to. The first row specifies the hardware block names, and the first column specifies the software task names. If a task is mapped onto a hardware block, it is listed under that block. We follow two conventions within this spread sheet.
   1) Under the NoC and Memory blocks,  direction of the accesses (read or write) needs to be specified, and this is denoted by an arrow **->**.
      For example, a cell that contains **Task1 -> Task2** under a memory **M0** cell indicates that **Task1 data is written into M0 and furthermore, this data will be read by Task2 (as Task1's child)**. Please note that only the write direction is specified, and the read direction is implied from the writes, as was shown in the previous example.
-  2) If multiple tasks are mapped to the same block, we separate them with a semicolon. 
+  2) If multiple tasks are mapped to the same block, we separate them with a semicolon.
 
 
 ## Running FARSI
@@ -104,13 +112,13 @@ The output data will be provided under the data_collection/data/simple_sim_run/$
 
 
 ### Simulation + Exploration Heuristic ###
-The following commands allow the user to run both the simulation and exploration simulatenously. 
+The following commands allow the user to run both the simulation and exploration simulatenously.
 
 Switch into bellow directory.
 ```shell
 cd data_collection/collection_utils/what_ifs/
 ```
-Set the workload name properly in FARSI_what_ifs_with_params.py (Select among, audio_decoder, hpvm_cava, and edge_detection) and run FARSI. 
+Set the workload name properly in FARSI_what_ifs_with_params.py (Select among, audio_decoder, hpvm_cava, and edge_detection) and run FARSI.
 
 ```shell
 python FARSI_what_ifs_with_params.py   # run FARSI
