@@ -4,7 +4,12 @@
 
 import os
 import sys
-sys.path.append("/home/aaditya/Project_FARSI/")
-# home_dir = os.getcwd() +"/../../../"
-home_dir = "/home/aaditya/Project_FARSI/"
-# print(type(home_dir))
+# sys.path.append("/home/aaditya/Project_FARSI/")
+# # home_dir = os.getcwd() +"/../../../"
+# home_dir = "/home/aaditya/Project_FARSI/"
+# # print(type(home_dir))home_dir=/home/aaditya/Project_FARSI
+# sys.path.append(home_dir)
+home_dir="/home/aaditya/Project_FARSI"
+sys.path.append(home_dir)
+home_dir = "/home/aaditya/Project_FARSI"
+sys.path.append(home_dir)
